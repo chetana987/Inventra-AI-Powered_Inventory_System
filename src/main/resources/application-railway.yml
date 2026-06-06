@@ -11,22 +11,29 @@ spring:
     username: ${PGUSER}
     password: ${PGPASSWORD}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
+      idle-timeout: 300000
+      connection-timeout: 10000
+      max-lifetime: 600000
+      leak-detection-threshold: 60000
   jpa:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: false
+    open-in-view: false
     properties:
       hibernate:
         jdbc:
           batch_size: 25
+          timezone: UTC
         order_inserts: true
         order_updates: true
-  data:
-    redis:
-      url: ${REDIS_URL:redis://localhost:6379}
-      timeout: 2000ms
+  cache:
+    type: simple
 
 gemini:
   api-key: ${GEMINI_API_KEY:placeholder}
@@ -37,3 +44,5 @@ jwt:
 logging:
   level:
     com.inventra: INFO
+    com.zaxxer.hikari: WARN
+    io.lettuce: WARN
