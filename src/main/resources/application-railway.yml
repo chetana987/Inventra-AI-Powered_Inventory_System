@@ -1,0 +1,39 @@
+server:
+  port: ${PORT:8080}
+
+app:
+  cors:
+    allowed-origins: ${CORS_ORIGINS:https://*.railway.app}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}?sslmode=require
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 25
+        order_inserts: true
+        order_updates: true
+  data:
+    redis:
+      url: ${REDIS_URL}
+      timeout: 2000ms
+
+gemini:
+  api-key: ${GEMINI_API_KEY:placeholder}
+
+jwt:
+  secret: ${JWT_SECRET:railway-inventra-jwt-secret-key-32-chars-minimum}
+
+logging:
+  level:
+    com.inventra: INFO
