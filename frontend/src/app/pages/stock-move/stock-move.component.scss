@@ -37,3 +37,16 @@
   .form-actions { flex-direction: column-reverse; }
   .form-actions .btn-primary, .form-actions .btn-ghost { width: 100%; justify-content: center; min-height: 44px; }
 }
+
+@media (max-width: 390px) {
+  .page { padding: 0.75rem; }
+  .stock-form { padding: 1rem; border-radius: var(--radius-md); }
+  .form-group { margin-bottom: 0.75rem; }
+  .form-group label { font-size: 0.82rem; }
+  .form-actions { margin-top: 1rem; padding-top: 1rem; }
+}
+
+@media (max-width: 320px) {
+  .page { padding: 0.5rem; }
+  .stock-form { padding: 0.75rem; border-radius: var(--radius-sm); }
+}

@@ -264,3 +264,19 @@
   .login-header p { font-size: 0.82rem; }
   .input-wrapper input { min-height: 46px; font-size: 16px; }
 }
+
+@media (max-width: 390px) {
+  .login-card { padding: 1.25rem 1rem; border-radius: 12px; }
+  .login-header { margin-bottom: 1.25rem; }
+  .login-header h1 { font-size: 1.15rem; }
+  .form-group { margin-bottom: 0.75rem; }
+  .input-wrapper input { min-height: 44px; padding: 0.6rem 2rem 0.6rem 2rem; }
+  .btn-primary { min-height: 44px; padding: 0.7rem; }
+}
+
+@media (max-width: 320px) {
+  .login-wrapper { padding: 0.25rem; padding-top: 1rem; }
+  .login-card { padding: 1rem 0.75rem; }
+  .login-header .login-logo { font-size: 1.2rem; }
+  .checkbox-label { font-size: 0.82rem; }
+}

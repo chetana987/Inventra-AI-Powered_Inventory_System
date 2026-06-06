@@ -57,13 +57,13 @@
         <tbody>
           @for (p of pageData.content; track p.id) {
             <tr>
-              <td><code>{{ p.productCode }}</code></td>
-              <td><strong>{{ p.name }}</strong></td>
-              <td><span class="badge badge-primary">{{ p.category }}</span></td>
-              <td>{{ p.price | currency }}</td>
-              <td>{{ p.quantity }}</td>
-              <td>{{ p.minimumStockLevel }}</td>
-              <td class="actions">
+              <td data-label="Code"><code>{{ p.productCode }}</code></td>
+              <td data-label="Name"><strong>{{ p.name }}</strong></td>
+              <td data-label="Category"><span class="badge badge-primary">{{ p.category }}</span></td>
+              <td data-label="Price">{{ p.price | currency }}</td>
+              <td data-label="Qty">{{ p.quantity }}</td>
+              <td data-label="Min Level">{{ p.minimumStockLevel }}</td>
+              <td data-label="Actions" class="actions">
                 <a [routerLink]="['/dashboard/products', p.id, 'edit']" class="btn-sm btn-outline">Edit</a>
                 <button class="btn-sm btn-danger" (click)="confirmDelete(p.id)">Delete</button>
               </td>

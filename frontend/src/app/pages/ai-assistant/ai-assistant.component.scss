@@ -432,6 +432,7 @@
 /* ─── Responsive ─── */
 
 @media (max-width: 768px) {
+  .assistant { height: 100dvh; }
   .sidebar {
     position: fixed;
     left: 0;
@@ -465,4 +466,32 @@
   .input-area { padding: 0 0.75rem 0.75rem; }
   .input-wrapper input { min-height: 44px; font-size: 16px; }
   .btn-send { width: 44px; height: 44px; }
+}
+
+@media (max-width: 480px) {
+  .assistant { height: 100dvh; }
+  .welcome { padding: 1.5rem 1rem; }
+  .welcome-title { font-size: 1.15rem; }
+  .welcome-sub { font-size: 0.8rem; margin-bottom: 1.25rem; }
+  .welcome-logo { width: 48px; height: 48px; svg { width: 30px; height: 30px; } }
+  .suggestion-card { padding: 0.65rem 0.75rem; font-size: 0.78rem; }
+  .suggestion-icon { width: 30px; height: 30px; svg { width: 16px; height: 16px; } }
+  .message { padding: 0.5rem 0.75rem; }
+  .msg-bubble { font-size: 0.85rem; max-width: 90%; }
+  .msg-content { max-width: 100%; }
+  .input-area { padding: 0 0.5rem 0.5rem; }
+  .input-wrapper { border-radius: 10px; padding: 0.25rem 0.25rem 0.25rem 0.75rem; }
+  .input-wrapper input { font-size: 16px; padding: 0.4rem 0; }
+  .btn-send { width: 40px; height: 40px; }
+  .messages-container { padding: 1rem 0.5rem; }
+}
+
+@media (max-width: 390px) {
+  .sidebar { width: 100%; }
+  .welcome-title { font-size: 1rem; }
+  .suggestions-grid { gap: 0.5rem; }
+  .suggestion-card { padding: 0.55rem 0.65rem; }
+  .topbar { padding: 0.5rem 0.75rem; }
+  .topbar-title { font-size: 0.85rem; }
+  .btn-clear { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
 }

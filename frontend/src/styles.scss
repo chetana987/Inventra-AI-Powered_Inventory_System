@@ -328,6 +328,47 @@ table {
   }
 }
 
+/* ====== RESPONSIVE TABLES (card layout on mobile) ====== */
+
+@mixin table-cards {
+  table, thead, tbody, tfoot, tr, th, td { display: block; }
+  thead { display: none; }
+  tr {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: var(--shadow-xs);
+  }
+  td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    gap: 0.75rem;
+    &::before {
+      content: attr(data-label);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      flex-shrink: 0;
+    }
+    &:last-child { border-bottom: none; }
+    &.actions {
+      justify-content: flex-end;
+      gap: 0.5rem;
+      &::before { display: none; }
+    }
+  }
+  tbody tr {
+    &:hover { background: var(--color-white); }
+  }
+}
+
 /* ====== BADGES ====== */
 
 .badge {
@@ -566,18 +607,40 @@ table {
 @media (max-width: 768px) {
   .page { padding: var(--space-4); }
   .page-header { flex-direction: column; align-items: stretch; }
-  .page-header .header-actions { justify-content: stretch; }
+  .page-header .header-actions { justify-content: stretch; flex-direction: column; }
   .page-header .header-actions a, .page-header > a.btn-primary { text-align: center; }
+  .search-bar { flex-direction: column; align-items: stretch; }
   .search-bar input, .search-bar select { min-width: 0; width: 100%; }
-  .table-wrapper { border-radius: var(--radius-md); border-left: none; border-right: none; }
-  table { font-size: var(--text-sm); }
-  table th, table td { padding: 0.5rem 0.6rem; }
+  .table-wrapper { border-radius: var(--radius-md); border-left: none; border-right: none; overflow-x: hidden; }
+  @include table-cards;
+  .pagination { gap: 0.2rem; }
   .pagination button { min-width: 32px; padding: 0.35rem 0.5rem; font-size: var(--text-sm); }
+  .pagination .page-info { width: 100%; text-align: center; margin-left: 0; margin-top: 0.5rem; }
   .modal { padding: var(--space-5); margin: var(--space-2); border-radius: var(--radius-lg); }
   .card-body { padding: var(--space-4); }
-  .card-header { padding: var(--space-4); }
+  .card-header { padding: var(--space-4); flex-direction: column; align-items: stretch; }
   .toast { min-width: 0; max-width: calc(100vw - 2rem); }
   .toast-container { right: 0.75rem; left: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 { font-size: var(--text-xl); }
+  .page-header p { font-size: var(--text-xs); }
+  .empty-state { padding: var(--space-8) var(--space-4); }
+}
+
+@media (max-width: 390px) {
+  .page { padding: var(--space-3); }
+  .page-header h1 { font-size: var(--text-lg); }
+  .btn-primary, .btn-secondary, .btn-danger, .btn-ghost, .btn-outline, .btn-success {
+    padding: 0.5rem 0.9rem; font-size: var(--text-sm); min-height: 36px;
+  }
+  .header-actions a, .header-actions button { width: 100%; }
+  .modal { padding: var(--space-4); }
+  .modal-actions { flex-direction: column; }
+  .modal-actions button { width: 100%; }
+  tr { padding: 0.5rem 0.75rem; }
+  td { padding: 0.4rem 0; font-size: var(--text-sm); }
 }
 
 @media (max-width: 480px) {

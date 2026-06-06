@@ -56,13 +56,13 @@
         <tbody>
           @for (p of filtered; track p.id) {
             <tr>
-              <td><code>{{ p.productCode }}</code></td>
-              <td><strong>{{ p.name }}</strong></td>
-              <td><span class="badge badge-primary">{{ p.category }}</span></td>
-              <td><strong style="color:#dc2626">{{ p.quantity }}</strong></td>
-              <td>{{ p.minimumStockLevel }}</td>
-              <td><strong style="color:#dc2626">{{ p.minimumStockLevel - p.quantity }}</strong></td>
-              <td><span class="badge badge-danger">Low Stock</span></td>
+              <td data-label="Code"><code>{{ p.productCode }}</code></td>
+              <td data-label="Name"><strong>{{ p.name }}</strong></td>
+              <td data-label="Category"><span class="badge badge-primary">{{ p.category }}</span></td>
+              <td data-label="Current Qty"><strong style="color:#dc2626">{{ p.quantity }}</strong></td>
+              <td data-label="Min Level">{{ p.minimumStockLevel }}</td>
+              <td data-label="Shortfall"><strong style="color:#dc2626">{{ p.minimumStockLevel - p.quantity }}</strong></td>
+              <td data-label="Status"><span class="badge badge-danger">Low Stock</span></td>
             </tr>
           }
         </tbody>

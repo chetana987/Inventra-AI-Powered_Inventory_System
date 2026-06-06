@@ -58,17 +58,17 @@
         <tbody>
           @for (t of pageData.content; track t.id) {
             <tr>
-              <td style="white-space:nowrap">{{ t.transactionDate | date:'dd MMM yyyy, HH:mm' }}</td>
-              <td><strong>{{ t.productName }}</strong></td>
-              <td><code>{{ t.productCode }}</code></td>
-              <td>
+              <td data-label="Date" style="white-space:nowrap">{{ t.transactionDate | date:'dd MMM yyyy, HH:mm' }}</td>
+              <td data-label="Product"><strong>{{ t.productName }}</strong></td>
+              <td data-label="Code"><code>{{ t.productCode }}</code></td>
+              <td data-label="Type">
                 <span class="badge" [class.badge-in]="t.transactionType === 'STOCK_IN'" [class.badge-out]="t.transactionType === 'STOCK_OUT'">
                   {{ t.transactionType === 'STOCK_IN' ? 'Stock In' : 'Stock Out' }}
                 </span>
               </td>
-              <td><strong>{{ t.quantity }}</strong></td>
-              <td>{{ t.remarks || '—' }}</td>
-              <td>{{ t.performedBy }}</td>
+              <td data-label="Qty"><strong>{{ t.quantity }}</strong></td>
+              <td data-label="Remarks">{{ t.remarks || '—' }}</td>
+              <td data-label="By">{{ t.performedBy }}</td>
             </tr>
           }
         </tbody>

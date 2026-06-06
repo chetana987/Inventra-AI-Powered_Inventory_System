@@ -260,3 +260,20 @@
   .signup-header p { font-size: 0.82rem; }
   .input-wrapper input { min-height: 46px; font-size: 16px; }
 }
+
+@media (max-width: 390px) {
+  .signup-card { padding: 1.25rem 1rem; border-radius: 12px; }
+  .signup-header { margin-bottom: 1.25rem; }
+  .signup-header h1 { font-size: 1.15rem; }
+  .form-group { margin-bottom: 0.75rem; }
+  .input-wrapper input { min-height: 44px; padding: 0.6rem 2rem 0.6rem 2rem; }
+  .btn-primary { min-height: 44px; padding: 0.7rem; }
+  .pw-strength { flex-direction: column; gap: 4px; }
+  .pw-label { text-align: left; min-width: auto; }
+}
+
+@media (max-width: 320px) {
+  .signup-wrapper { padding: 0.25rem; padding-top: 1rem; }
+  .signup-card { padding: 1rem 0.75rem; }
+  .signup-header .signup-logo { font-size: 1.2rem; }
+}
