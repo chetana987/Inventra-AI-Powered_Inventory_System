@@ -1,9 +1,0 @@
-{
-  "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "npm ci && npm run build -- --configuration production"
-  },
-  "deploy": {
-    "startCommand": "node server.js"
-  }
-}
