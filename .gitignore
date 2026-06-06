@@ -1,0 +1,33 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+*.log
+.idea/
+*.iml
+*.iws
+*.ipr
+.settings/
+.project
+.classpath
+.sts4-cache/
+bin/
+
+# Node
+node_modules/
+dist/
+frontend/.angular/
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+*.env.local
+
+# Logs
+logs/
+*.log

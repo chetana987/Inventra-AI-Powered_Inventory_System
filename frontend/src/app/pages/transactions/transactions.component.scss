@@ -1,0 +1,6 @@
+.page { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+
+@media (max-width: 768px) {
+  .page { padding: 1rem; }
+  .header-actions a { flex: 1; text-align: center; }
+}

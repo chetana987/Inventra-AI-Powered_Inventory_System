@@ -1,0 +1,230 @@
+@if (error && !loading) {
+  <div class="alert alert-error animate-fade-in">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+      <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+    </svg>
+    <span>{{ error }}</span>
+    <button class="btn-ghost btn-sm" style="margin-left:auto;flex-shrink:0" (click)="loadDashboard()">Retry</button>
+  </div>
+}
+
+@if (loading) {
+  <div class="page">
+    <div class="skeleton skeleton-text-lg" style="width:200px;margin-bottom:8px"></div>
+    <div class="skeleton skeleton-text" style="width:300px;margin-bottom:24px"></div>
+    <div class="stat-grid">
+      @for (_ of [1,2,3,4]; track $index) {
+        <app-skeleton variant="stat-card" />
+      }
+    </div>
+    <div class="charts-grid" style="margin-top:24px">
+      @for (_ of [1,2,3]; track $index) {
+        <app-skeleton variant="card" />
+      }
+    </div>
+  </div>
+}
+
+@if (!loading && data) {
+  <div class="page">
+    <div class="welcome-section animate-fade-in">
+      <div class="welcome-avatar">{{ getInitials() }}</div>
+      <div>
+        <h1>Welcome back{{ userName() }}</h1>
+        <div class="welcome-meta">
+          <span class="badge badge-primary">{{ user?.role }}</span>
+          <span>{{ data.totalProducts }} products tracked</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-grid stagger-children">
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Total Products</span>
+          <span class="stat-value">{{ data.totalProducts }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-inventory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Total Inventory</span>
+          <span class="stat-value">{{ data.totalStockQuantity | number }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-lowstock">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Low Stock Items</span>
+          <span class="stat-value stat-value-danger">{{ data.lowStockCount }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-transactions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Transactions (6mo)</span>
+          <span class="stat-value">{{ getTotalTransactions() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card animate-fade-in-up">
+        <div class="chart-header">
+          <h3>Inventory Distribution</h3>
+        </div>
+        <div class="chart-body donut-container">
+          @if (data.inventoryDistribution.length > 0) {
+            <div class="donut" [style.background]="donutConicGradient()">
+              <div class="donut-center">
+                <span class="donut-total">{{ data.totalStockQuantity }}</span>
+                <span class="donut-label">Total Units</span>
+              </div>
+            </div>
+            <div class="donut-legend">
+              @for (d of data.inventoryDistribution; track d.category; let i = $index) {
+                <div class="legend-item">
+                  <span class="legend-dot" [style.background]="donutColors[i % donutColors.length]"></span>
+                  <span class="legend-category">{{ d.category }}</span>
+                  <span class="legend-value">{{ d.count }}</span>
+                  <span class="legend-pct">{{ d.percentage }}%</span>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="text-muted" style="padding:2rem;text-align:center">No inventory data available</p>
+          }
+        </div>
+      </div>
+
+      <div class="chart-card animate-fade-in-up">
+        <div class="chart-header">
+          <h3>Monthly Transactions</h3>
+        </div>
+        <div class="chart-body">
+          @if (data.monthlyTransactions.length > 0) {
+            <div class="bar-chart">
+              @for (m of data.monthlyTransactions; track m.monthLabel) {
+                <div class="bar-group">
+                  <div class="bar-columns">
+                    <div class="bar bar-in" [style.height.px]="(m.inCount / getMaxCountValue(data.monthlyTransactions)) * 120" title="Stock In: {{ m.inCount }}"></div>
+                    <div class="bar bar-out" [style.height.px]="(m.outCount / getMaxCountValue(data.monthlyTransactions)) * 120" title="Stock Out: {{ m.outCount }}"></div>
+                  </div>
+                  <span class="bar-label">{{ m.monthLabel }}</span>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="text-muted" style="padding:2rem;text-align:center">No transaction data available</p>
+          }
+        </div>
+      </div>
+
+      <div class="chart-card animate-fade-in-up">
+        <div class="chart-header">
+          <h3>Stock Movement Trends</h3>
+        </div>
+        <div class="chart-body">
+          @if (data.stockMovementTrends.length > 0) {
+            <div class="bar-chart">
+              @for (m of data.stockMovementTrends; track m.monthLabel) {
+                <div class="bar-group">
+                  <div class="bar-columns">
+                    <div class="bar bar-in" [style.height.px]="(m.inQuantity / getMaxChartValue(data.stockMovementTrends)) * 120" title="In: {{ m.inQuantity }}"></div>
+                    <div class="bar bar-out" [style.height.px]="(m.outQuantity / getMaxChartValue(data.stockMovementTrends)) * 120" title="Out: {{ m.outQuantity }}"></div>
+                  </div>
+                  <span class="bar-label">{{ m.monthLabel }}</span>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="text-muted" style="padding:2rem;text-align:center">No stock movement data available</p>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-grid">
+      <div class="card animate-fade-in-up">
+        <div class="card-header">
+          <h3>Recent Activity</h3>
+        </div>
+        <div class="card-body" style="padding:0">
+          @if (data.recentTransactions.length > 0) {
+            <div class="activity-list">
+              @for (t of data.recentTransactions; track t.id) {
+                <div class="activity-item">
+                  <div class="activity-icon" [class.activity-in]="t.transactionType === 'STOCK_IN'" [class.activity-out]="t.transactionType === 'STOCK_OUT'">
+                    @if (t.transactionType === 'STOCK_IN') {
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    } @else {
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="17 16 12 21 7 16"/><line x1="12" y1="21" x2="12" y2="9"/></svg>
+                    }
+                  </div>
+                  <div class="activity-detail">
+                    <span class="activity-product">{{ t.productName }}</span>
+                    <span class="activity-meta">{{ t.performedBy }} &middot; {{ t.transactionDate | date:'MMM d, h:mm a' }}</span>
+                  </div>
+                  <span class="badge" [class.badge-in]="t.transactionType === 'STOCK_IN'" [class.badge-out]="t.transactionType === 'STOCK_OUT'">
+                    {{ t.transactionType === 'STOCK_IN' ? '+' : '-' }}{{ t.quantity }}
+                  </span>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="empty-state empty-state-sm">
+              <h3>No recent activity</h3>
+              <p>Transactions will appear here once you start managing inventory.</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="card animate-fade-in-up">
+        <div class="card-header">
+          <h3>Low Stock Alerts</h3>
+          @if (data.lowStockProducts.length > 0) {
+            <a routerLink="/dashboard/low-stock" class="btn-ghost btn-sm">View All</a>
+          }
+        </div>
+        <div class="card-body" style="padding:0">
+          @if (data.lowStockProducts.length > 0) {
+            <div class="low-stock-list">
+              @for (p of data.lowStockProducts; track p.id) {
+                <div class="low-stock-item">
+                  <div class="low-stock-info">
+                    <span class="low-stock-name">{{ p.name }}</span>
+                    <span class="low-stock-code">{{ p.productCode }}</span>
+                  </div>
+                  <div class="low-stock-metrics">
+                    <span class="low-stock-qty">{{ p.quantity }}</span>
+                    <span class="low-stock-sep">/</span>
+                    <span class="low-stock-min">{{ p.minimumStockLevel }}</span>
+                    <span class="badge badge-danger">{{ p.minimumStockLevel - p.quantity }} short</span>
+                  </div>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="empty-state empty-state-sm">
+              <h3>All stocked up</h3>
+              <p>No products are below their minimum stock level.</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}

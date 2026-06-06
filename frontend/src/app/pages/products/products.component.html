@@ -1,0 +1,100 @@
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-text">
+      <h1>Products</h1>
+      @if (pageData) { <p>{{ pageData.totalElements }} product(s) total</p> }
+    </div>
+    <div class="header-actions">
+      <a routerLink="/dashboard/products/new" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Product
+      </a>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchName" placeholder="Search by name…" (keyup.enter)="search()" />
+    <input type="text" [(ngModel)]="searchCategory" placeholder="Search by category…" (keyup.enter)="search()" />
+    <button class="btn-secondary" (click)="search()">Search</button>
+    <button class="btn-ghost" (click)="resetSearch()">Clear</button>
+  </div>
+
+  @if (loading) {
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Code</th><th>Name</th><th>Category</th><th>Price</th><th>Qty</th><th>Min Level</th><th>Actions</th></tr></thead>
+        <tbody>
+          @for (_ of [1,2,3,4,5]; track $index) {
+            <app-skeleton variant="table-row" [columns]="[15, 25, 15, 12, 8, 10, 15]" />
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else if (error) {
+    <div class="alert alert-error animate-fade-in">{{ error }}</div>
+  } @else if (pageData && pageData.content.length === 0) {
+    <app-empty-state
+      icon="search"
+      title="No products found"
+      description="Try adjusting your search or add a new product to get started."
+      actionLabel="Add Product"
+      actionRoute="/dashboard/products/new"
+    />
+  } @else if (pageData) {
+    <div class="table-wrapper animate-fade-in">
+      <table>
+        <thead>
+          <tr>
+            <th (click)="sort('productCode')" class="sortable">Code {{ sortIcon('productCode') }}</th>
+            <th (click)="sort('name')" class="sortable">Name {{ sortIcon('name') }}</th>
+            <th (click)="sort('category')" class="sortable">Category {{ sortIcon('category') }}</th>
+            <th (click)="sort('price')" class="sortable">Price {{ sortIcon('price') }}</th>
+            <th (click)="sort('quantity')" class="sortable">Qty {{ sortIcon('quantity') }}</th>
+            <th>Min Level</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of pageData.content; track p.id) {
+            <tr>
+              <td><code>{{ p.productCode }}</code></td>
+              <td><strong>{{ p.name }}</strong></td>
+              <td><span class="badge badge-primary">{{ p.category }}</span></td>
+              <td>{{ p.price | currency }}</td>
+              <td>{{ p.quantity }}</td>
+              <td>{{ p.minimumStockLevel }}</td>
+              <td class="actions">
+                <a [routerLink]="['/dashboard/products', p.id, 'edit']" class="btn-sm btn-outline">Edit</a>
+                <button class="btn-sm btn-danger" (click)="confirmDelete(p.id)">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button [disabled]="pageData.first" (click)="goToPage(0)" title="First">&laquo;</button>
+      <button [disabled]="pageData.first" (click)="goToPage(pageData.page - 1)" title="Previous">&lsaquo;</button>
+      @for (p of getPageRange(pageData); track p) {
+        <button [class.active]="p === pageData.page" (click)="goToPage(p)">{{ p + 1 }}</button>
+      }
+      <button [disabled]="pageData.last" (click)="goToPage(pageData.page + 1)" title="Next">&rsaquo;</button>
+      <button [disabled]="pageData.last" (click)="goToPage(pageData.totalPages - 1)" title="Last">&raquo;</button>
+      <span class="page-info">Page {{ pageData.page + 1 }} of {{ pageData.totalPages }}</span>
+    </div>
+  }
+</div>
+
+@if (deleteId != null) {
+  <div class="modal-overlay" (click)="cancelDelete()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3>Confirm Delete</h3>
+      <p>Are you sure you want to delete this product? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn-ghost" (click)="cancelDelete()">Cancel</button>
+        <button class="btn-danger" (click)="executeDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+}

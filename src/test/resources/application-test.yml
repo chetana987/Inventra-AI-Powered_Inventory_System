@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:inventra_test;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  cache:
+    type: none
+
+jwt:
+  secret: 366564363966333936343336363433393366333933373330333633353332333133373330333433393332333133370000
+  expiration: 86400000

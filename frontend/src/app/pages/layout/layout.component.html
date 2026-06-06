@@ -1,0 +1,38 @@
+<div class="app-shell">
+  <aside class="sidebar" [class.open]="sidebarOpen">
+    <div class="sidebar-header">
+      <a routerLink="/" class="sidebar-brand">Inventra</a>
+      <button class="sidebar-close" (click)="closeSidebar()" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" (click)="closeSidebar()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
+      <a routerLink="/dashboard/products" (click)="closeSidebar()" routerLinkActive="active">Products</a>
+      <a routerLink="/dashboard/inventory" (click)="closeSidebar()" routerLinkActive="active">Inventory</a>
+      <a routerLink="/dashboard/low-stock" (click)="closeSidebar()" routerLinkActive="active">Low Stock</a>
+      <a routerLink="/ai" (click)="closeSidebar()" routerLinkActive="active">AI Assistant</a>
+      <a routerLink="/dashboard/profile" (click)="closeSidebar()" routerLinkActive="active">Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <span class="user-avatar">{{ (user?.email || 'U').charAt(0).toUpperCase() }}</span>
+        <div class="user-info">
+          <span class="user-email">{{ user?.email }}</span>
+          <span class="user-role">{{ user?.role }}</span>
+        </div>
+      </div>
+      <button class="btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </aside>
+  @if (sidebarOpen) {
+    <div class="sidebar-backdrop" (click)="closeSidebar()"></div>
+  }
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger" (click)="toggleSidebar()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <span class="topbar-title">Inventra</span>
+    </div>
+    <router-outlet />
+  </main>
+</div>

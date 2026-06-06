@@ -1,0 +1,72 @@
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-text">
+      <h1>Low Stock Products</h1>
+      @if (!loading) { <p>{{ filtered.length }} product(s) below minimum stock level</p> }
+    </div>
+    <button class="btn-primary" (click)="refresh()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      Refresh
+    </button>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search by name or code…" (input)="applyFilters()" />
+    <select [(ngModel)]="selectedCategory" (change)="applyFilters()">
+      <option value="">All Categories</option>
+      @for (c of categories; track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </div>
+
+  @if (loading) {
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Code</th><th>Name</th><th>Category</th><th>Current Qty</th><th>Min Level</th><th>Shortfall</th><th>Status</th></tr></thead>
+        <tbody>
+          @for (_ of [1,2,3]; track $index) {
+            <app-skeleton variant="table-row" [columns]="[15, 25, 15, 12, 10, 10, 13]" />
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else if (error) {
+    <div class="alert alert-error animate-fade-in">{{ error }}</div>
+  } @else if (filtered.length === 0) {
+    <app-empty-state
+      [icon]="allProducts.length === 0 ? 'alert' : 'search'"
+      [title]="allProducts.length === 0 ? 'All stocked up' : 'No results'"
+      [description]="allProducts.length === 0 ? 'No products are below their minimum stock level. Inventory is healthy.' : 'Try adjusting your search or filter criteria.'"
+    />
+  } @else {
+    <div class="table-wrapper animate-fade-in">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Current Qty</th>
+            <th>Min Level</th>
+            <th>Shortfall</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of filtered; track p.id) {
+            <tr>
+              <td><code>{{ p.productCode }}</code></td>
+              <td><strong>{{ p.name }}</strong></td>
+              <td><span class="badge badge-primary">{{ p.category }}</span></td>
+              <td><strong style="color:#dc2626">{{ p.quantity }}</strong></td>
+              <td>{{ p.minimumStockLevel }}</td>
+              <td><strong style="color:#dc2626">{{ p.minimumStockLevel - p.quantity }}</strong></td>
+              <td><span class="badge badge-danger">Low Stock</span></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: inventra
+  profiles:
+    active: dev
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/inventra?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:chetana}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    open-in-view: false
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+gemini:
+  api-key: ${GEMINI_API_KEY:dev-placeholder-key}
+  model: gemini-2.0-flash
+  endpoint: https://generativelanguage.googleapis.com/v1beta/models
+
+jwt:
+  secret: ${JWT_SECRET:e0SCs8dFjp501nXF2ZuT3u/hOrsd5BA30TJ/ZVCiyLk=}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+logging:
+  level:
+    com.inventra: DEBUG
+    org.springframework.security: INFO
