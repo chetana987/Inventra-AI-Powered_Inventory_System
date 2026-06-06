@@ -1,0 +1,5 @@
+[phases.setup]
+nixPkgs = ["nodejs_20", "jdk21"]
+
+[phases.build]
+cmds = ["bash build.sh"]
