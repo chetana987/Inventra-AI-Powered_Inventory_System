@@ -23,11 +23,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findByIdWithLock(@Param("id") Long id);
 
     @Query(value = "SELECT * FROM products p WHERE " +
-           "(:name IS NULL OR LOWER(p.name::text) LIKE LOWER(CONCAT('%', :name::text, '%'))) AND " +
-           "(:category IS NULL OR LOWER(p.category::text) = LOWER(:category::text))",
+           "(:name IS NULL OR LOWER(p.name::text) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
+           "(:category IS NULL OR LOWER(p.category::text) = LOWER(:category))",
            countQuery = "SELECT COUNT(*) FROM products p WHERE " +
-           "(:name IS NULL OR LOWER(p.name::text) LIKE LOWER(CONCAT('%', :name::text, '%'))) AND " +
-           "(:category IS NULL OR LOWER(p.category::text) = LOWER(:category::text))",
+           "(:name IS NULL OR LOWER(p.name::text) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
+           "(:category IS NULL OR LOWER(p.category::text) = LOWER(:category))",
            nativeQuery = true)
     Page<Product> searchProducts(@Param("name") String name,
                                  @Param("category") String category,
