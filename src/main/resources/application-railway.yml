@@ -39,7 +39,7 @@ gemini:
   api-key: ${GEMINI_API_KEY:placeholder}
 
 jwt:
-  secret: ${JWT_SECRET:railway-inventra-jwt-secret-key-32-chars-minimum}
+  secret: ${JWT_SECRET:CsRAmfiPNDYe0DuTp09KjRx51aWry71cynt2D5L43OI=}
 
 logging:
   level:
