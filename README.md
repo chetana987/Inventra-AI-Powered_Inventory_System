@@ -5,6 +5,9 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)](https://redis.io/)
 [![Railway](https://img.shields.io/badge/Railway-0B0D0E?logo=railway)](https://railway.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Railway-0B0D0E?logo=railway)](https://inventra-ai-poweredinventorysystem-production.up.railway.app)
+
+**Live Demo:** [https://inventra-ai-poweredinventorysystem-production.up.railway.app](https://inventra-ai-poweredinventorysystem-production.up.railway.app)
 
 Intelligent inventory management powered by AI. Track stock levels, manage products, and get actionable insights through natural language queries.
 
@@ -60,15 +63,12 @@ Intelligent inventory management powered by AI. Track stock levels, manage produ
 
 ## Screenshots
 
-> Add your screenshots to the `screenshots/` folder and reference them here.
-
-| Screen                    | Preview                      |
-|---------------------------|------------------------------|
-| Dashboard                 | `screenshots/dashboard.png`  |
-| Products List             | `screenshots/products.png`   |
-| Stock Transactions        | `screenshots/transactions.png` |
-| AI Assistant              | `screenshots/ai-assistant.png` |
-| Login                     | `screenshots/login.png`      |
+| Screen               | Preview                                    |
+|----------------------|--------------------------------------------|
+| Main Page            | ![Main Page](screenshots/MainPage.png)     |
+| Dashboard            | ![Dashboard](screenshots/Dashboard.png)    |
+| Products List        | ![Products](screenshots/ProductPage.png)   |
+| Inventory            | ![Inventory](screenshots/InventodyPage.png) |
 
 ## Getting Started
 
@@ -181,6 +181,10 @@ This project is configured for one-click deployment on Railway:
 ├── pom.xml                      # Maven build
 └── .env.example                 # Environment template
 ```
+
+## Contribution
+
+**Chetana Mahajan** — Full-stack development, system architecture, design, testing, and deployment.
 
 ## License
 
