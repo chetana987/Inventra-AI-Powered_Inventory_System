@@ -27,8 +27,10 @@ a {
   --color-primary-light: #818CF8;
   --color-primary-dark: #4338CA;
   --color-primary-bg: #EEF2FF;
+  --color-accent-bg: #F5F3FF;
 
   --color-secondary: #6366F1;
+  --color-accent: #8B5CF6;
 
   --color-bg: #F8FAFC;
   --color-white: #FFFFFF;
@@ -103,6 +105,9 @@ a {
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 10px 25px -5px rgba(79,70,229,0.08), 0 8px 10px -6px rgba(0,0,0,0.04);
+  --shadow-btn: 0 4px 14px rgba(79,70,229,0.25);
 
   /* ─── Layout ─── */
   --sidebar-width: 260px;
@@ -181,10 +186,11 @@ textarea {
   to { opacity: 1; }
 }
 
-.animate-fade-in { animation: fadeIn 0.35s ease forwards; }
-.animate-fade-in-up { animation: fadeInUp 0.4s ease forwards; }
-.animate-fade-in-scale { animation: fadeInScale 0.3s ease forwards; }
-.animate-slide-in-right { animation: slideInRight 0.3s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+.animate-fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+.animate-fade-in-scale { animation: fadeInScale 0.35s ease forwards; }
+.animate-slide-in-right { animation: slideInRight 0.35s ease forwards; }
+.animate-slide-down { animation: slideDown 0.3s ease forwards; }
 .animate-pulse { animation: pulse 2s ease-in-out infinite; }
 
 /* ====== STAGGER ANIMATIONS ====== */
@@ -252,11 +258,28 @@ textarea {
 }
 
 .btn-primary {
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: #fff;
+  box-shadow: var(--shadow-btn);
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+  span, svg { position: relative; z-index: 1; }
   &:hover:not(:disabled) {
-    background: var(--color-primary-dark);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 6px 20px rgba(79,70,229,0.35);
+    transform: translateY(-1px);
+    &::after { opacity: 1; }
+  }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(79,70,229,0.2);
   }
 }
 
@@ -367,9 +390,13 @@ textarea {
 .card {
   background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xs);
-  transition: box-shadow var(--transition-base);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  &:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
 }
 
 .card-header {
@@ -759,7 +786,7 @@ table {
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
-  animation: fadeIn 0.3s ease;
+  animation: fadeInUp 0.4s ease;
 }
 
 .page-header {

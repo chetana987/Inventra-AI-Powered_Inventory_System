@@ -60,9 +60,9 @@
 
       <button type="submit" class="btn-primary" [disabled]="loading || loginForm.invalid">
         @if (loading) {
-          <span class="spinner"></span> Signing in...
+          <span class="spinner"></span><span> Signing in...</span>
         } @else {
-          Sign In
+          <span>Sign In</span>
         }
       </button>
     </form>

@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   loading = true;
   error = '';
 
-  donutColors = ['#4F46E5', '#6366F1', '#22C55E', '#F59E0B', '#EF4444', '#3B82F6', '#EC4897'];
+  donutColors = ['#4F46E5', '#6366F1', '#8B5CF6', '#A78BFA', '#22C55E', '#F59E0B', '#3B82F6'];
 
   constructor(
     private dashboard: DashboardService,

@@ -105,9 +105,9 @@
 
       <button type="submit" class="btn-primary" [disabled]="loading || signupForm.invalid">
         @if (loading) {
-          <span class="spinner"></span> Creating account...
+          <span class="spinner"></span><span> Creating account...</span>
         } @else {
-          Create Account
+          <span>Create Account</span>
         }
       </button>
     </form>
