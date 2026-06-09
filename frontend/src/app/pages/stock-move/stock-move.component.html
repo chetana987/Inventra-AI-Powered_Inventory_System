@@ -42,7 +42,7 @@
         <input class="form-input" id="remarks" formControlName="remarks" placeholder="Optional notes" />
       </div>
     </div>
-    <div class="card-footer" style="display:flex;gap:0.75rem;justify-content:flex-end">
+    <div class="card-footer">
       <a routerLink="/dashboard/inventory" class="btn-ghost">Cancel</a>
       <button type="submit" class="btn-primary" [disabled]="loading || form.invalid">
         @if (loading) {

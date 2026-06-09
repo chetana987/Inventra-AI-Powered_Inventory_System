@@ -4,16 +4,17 @@
   align-items: center;
   min-height: 100dvh;
   padding: 1rem;
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a0a2e 40%, #0f2027 100%);
+  background: #f8fafc;
 }
 
 .signup-card {
   width: 100%;
   max-width: 440px;
   background: #fff;
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
 }
 
 .signup-header {
@@ -23,27 +24,26 @@
   .signup-logo {
     display: inline-block;
     font-size: 1.5rem;
-    font-weight: 800;
-    color: #7c3aed;
+    font-weight: 700;
+    color: #4f46e5;
     letter-spacing: -0.02em;
     text-decoration: none;
     margin-bottom: 1rem;
 
-    &:hover { color: #6d28d9; }
+    &:hover { color: #4338ca; }
   }
 
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #111827;
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.35rem;
   }
 
   p {
     color: #6b7280;
     margin: 0;
     font-size: 0.9rem;
-    line-height: 1.5;
   }
 }
 
@@ -75,24 +75,24 @@
 
   input {
     width: 100%;
-    padding: 0.75rem 2.5rem 0.75rem 2.5rem;
-    border: 1.5px solid #d1d5db;
-    border-radius: 10px;
+    padding: 0.7rem 2.5rem 0.7rem 2.5rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: var(--radius-md);
     font-size: 0.95rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
     outline: none;
     background: #fff;
 
     &::placeholder { color: #9ca3af; }
 
     &:focus {
-      border-color: #7c3aed;
-      box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
     }
 
     &.is-invalid {
       border-color: #ef4444;
-      &:focus { box-shadow: 0 0 0 3px rgba(239,68,68,0.1); }
+      &:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1); }
     }
   }
 
@@ -104,9 +104,9 @@
     color: #9ca3af;
     cursor: pointer;
     padding: 6px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     display: flex;
-    transition: color 0.2s, background 0.2s;
+    transition: color var(--transition-base), background var(--transition-base);
 
     &:hover { color: #6b7280; background: #f3f4f6; }
   }
@@ -120,7 +120,6 @@
   padding-left: 2px;
 }
 
-/* Password Strength */
 .pw-strength {
   display: flex;
   align-items: center;
@@ -141,10 +140,10 @@
   border-radius: 99px;
   transition: width 0.3s ease, background 0.3s ease;
 
-  &.weak { background: #ef4444; width: 25% !important; }
-  &.fair { background: #f59e0b; width: 50% !important; }
-  &.strong { background: #10b981; width: 75% !important; }
-  &.very-strong { background: #7c3aed; width: 100% !important; }
+  &.weak { background: #ef4444; }
+  &.fair { background: #f59e0b; }
+  &.strong { background: #22c55e; }
+  &.very-strong { background: #4f46e5; }
 }
 
 .pw-label {
@@ -156,60 +155,35 @@
 
   &.weak { color: #ef4444; }
   &.fair { color: #f59e0b; }
-  &.strong { color: #10b981; }
-  &.very-strong { color: #7c3aed; }
+  &.strong { color: #22c55e; }
+  &.very-strong { color: #4f46e5; }
 }
 
-/* Alert */
-.alert {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
-  font-size: 0.85rem;
-  margin-bottom: 1.25rem;
-  line-height: 1.4;
-}
-
-.alert-error {
-  background: #fef2f2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
-}
-
-.alert-success {
-  background: #f0fdf4;
-  color: #166534;
-  border: 1px solid #bbf7d0;
-}
-
-/* Button */
 .btn-primary {
   width: 100%;
-  padding: 0.85rem;
-  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  padding: 0.8rem;
+  background: #4f46e5;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.15s;
+  transition: background var(--transition-base);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 48px;
+  min-height: 46px;
 
-  &:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+  &:hover:not(:disabled) { background: #4338ca; }
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 
 .spinner {
   width: 18px;
   height: 18px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
@@ -217,7 +191,6 @@
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Divider */
 .signup-divider {
   display: flex;
   align-items: center;
@@ -239,33 +212,30 @@
   }
 }
 
-/* Footer */
 .auth-footer {
   text-align: center;
   font-size: 0.9rem;
   color: #6b7280;
 
   a {
-    color: #7c3aed;
+    color: #4f46e5;
     font-weight: 600;
-    &:hover { color: #6d28d9; text-decoration: underline; }
+    &:hover { color: #4338ca; text-decoration: underline; }
   }
 }
 
-/* Responsive */
 @media (max-width: 480px) {
-  .signup-wrapper { padding: 0.5rem; align-items: flex-start; padding-top: 2rem; }
-  .signup-card { padding: 1.75rem 1.25rem; border-radius: 14px; }
+  .signup-wrapper { padding: 0.75rem; }
+  .signup-card { padding: 1.5rem 1.25rem; }
   .signup-header h1 { font-size: 1.35rem; }
-  .signup-header p { font-size: 0.82rem; }
   .input-wrapper input { min-height: 46px; font-size: 16px; }
 }
 
 @media (max-width: 390px) {
-  .signup-card { padding: 1.25rem 1rem; border-radius: 12px; }
-  .signup-header { margin-bottom: 1.25rem; }
-  .signup-header h1 { font-size: 1.15rem; }
-  .form-group { margin-bottom: 0.75rem; }
+  .signup-card { padding: 1.25rem 1rem; }
+  .signup-header { margin-bottom: 1.5rem; }
+  .signup-header h1 { font-size: 1.2rem; }
+  .form-group { margin-bottom: 1rem; }
   .input-wrapper input { min-height: 44px; padding: 0.6rem 2rem 0.6rem 2rem; }
   .btn-primary { min-height: 44px; padding: 0.7rem; }
   .pw-strength { flex-direction: column; gap: 4px; }
@@ -273,7 +243,7 @@
 }
 
 @media (max-width: 320px) {
-  .signup-wrapper { padding: 0.25rem; padding-top: 1rem; }
+  .signup-wrapper { padding: 0.5rem; }
   .signup-card { padding: 1rem 0.75rem; }
   .signup-header .signup-logo { font-size: 1.2rem; }
 }

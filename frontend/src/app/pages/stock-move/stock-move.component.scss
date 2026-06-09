@@ -1,52 +1,17 @@
-.page { padding: 2rem; max-width: 600px; margin: 0 auto; }
-
-.stock-form {
-  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-}
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-.form-group {
-  margin-bottom: 1.25rem;
-
-  label { display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 0.375rem; }
-
-  input, select {
-    width: 100%; padding: 0.65rem 0.75rem; border: 1.5px solid #d1d5db; border-radius: 8px;
-    font-size: 0.9rem; outline: none; box-sizing: border-box; font-family: inherit;
-    min-height: 42px;
-
-    &:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
-  }
-}
-
-.field-hint { color: #6b7280; font-size: 0.85rem; margin: 0; }
-.field-error { display: block; color: #ef4444; font-size: 0.8rem; margin-top: 0.3rem; }
-
-.form-actions {
-  display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1.5rem;
-  border-top: 1px solid #e5e7eb;
-}
-
 @media (max-width: 768px) {
-  .page { padding: 1rem; }
-  .stock-form { padding: 1.25rem; }
-  .form-row { grid-template-columns: 1fr; gap: 0; }
-  .form-group input, .form-group select { min-height: 44px; font-size: 16px; }
-  .form-actions { flex-direction: column-reverse; }
-  .form-actions .btn-primary, .form-actions .btn-ghost { width: 100%; justify-content: center; min-height: 44px; }
-}
+  .card-footer {
+    flex-direction: column-reverse;
+    .btn-primary,
+    .btn-ghost {
+      width: 100%;
+      justify-content: center;
+      min-height: 44px;
+    }
+  }
 
-@media (max-width: 390px) {
-  .page { padding: 0.75rem; }
-  .stock-form { padding: 1rem; border-radius: var(--radius-md); }
-  .form-group { margin-bottom: 0.75rem; }
-  .form-group label { font-size: 0.82rem; }
-  .form-actions { margin-top: 1rem; padding-top: 1rem; }
-}
-
-@media (max-width: 320px) {
-  .page { padding: 0.5rem; }
-  .stock-form { padding: 0.75rem; border-radius: var(--radius-sm); }
+  .form-input,
+  .form-select {
+    min-height: 44px;
+    font-size: 16px;
+  }
 }

@@ -58,7 +58,7 @@
         <tbody>
           @for (t of pageData.content; track t.id) {
             <tr>
-              <td data-label="Date" style="white-space:nowrap">{{ t.transactionDate | date:'dd MMM yyyy, HH:mm' }}</td>
+              <td data-label="Date" class="text-nowrap">{{ t.transactionDate | date:'dd MMM yyyy, HH:mm' }}</td>
               <td data-label="Product"><strong>{{ t.productName }}</strong></td>
               <td data-label="Code"><code>{{ t.productCode }}</code></td>
               <td data-label="Type">

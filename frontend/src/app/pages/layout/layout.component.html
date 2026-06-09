@@ -2,37 +2,95 @@
   <aside class="sidebar" [class.open]="sidebarOpen">
     <div class="sidebar-header">
       <a routerLink="/" class="sidebar-brand">Inventra</a>
-      <button class="sidebar-close" (click)="closeSidebar()" aria-label="Close menu">&times;</button>
+      <button class="sidebar-close-btn" (click)="closeSidebar()" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
     <nav class="sidebar-nav">
-      <a routerLink="/dashboard" (click)="closeSidebar()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
-      <a routerLink="/dashboard/products" (click)="closeSidebar()" routerLinkActive="active">Products</a>
-      <a routerLink="/dashboard/inventory" (click)="closeSidebar()" routerLinkActive="active">Inventory</a>
-      <a routerLink="/dashboard/low-stock" (click)="closeSidebar()" routerLinkActive="active">Low Stock</a>
-      <a routerLink="/ai" (click)="closeSidebar()" routerLinkActive="active">AI Assistant</a>
-      <a routerLink="/dashboard/profile" (click)="closeSidebar()" routerLinkActive="active">Profile</a>
+      <a routerLink="/dashboard" (click)="closeSidebar()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/dashboard/products" (click)="closeSidebar()" routerLinkActive="active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16.5 9.4 7.55 4.24a1 1 0 0 0-1.1 0L2.5 6.5a1 1 0 0 0-.5.87v5.26a1 1 0 0 0 .5.87l3.95 2.26"></path>
+          <path d="M16.5 9.4v5.26a1 1 0 0 1-.5.87l-3.95 2.26a1 1 0 0 1-1.1 0L6.5 15.4"></path>
+          <path d="M5.5 8.13 12 12l6.5-3.87"></path>
+          <path d="M18.5 7.5 21 8.87a1 1 0 0 1 .5.87v5.26a1 1 0 0 1-.5.87l-3.95 2.26a1 1 0 0 1-1.1 0L12 15.4"></path>
+        </svg>
+        <span>Products</span>
+      </a>
+      <a routerLink="/dashboard/inventory" (click)="closeSidebar()" routerLinkActive="active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+          <polyline points="16 7 22 7 22 13"></polyline>
+        </svg>
+        <span>Inventory</span>
+      </a>
+      <a routerLink="/dashboard/low-stock" (click)="closeSidebar()" routerLinkActive="active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>Low Stock</span>
+      </a>
+      <a routerLink="/ai" (click)="closeSidebar()" routerLinkActive="active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span>AI Assistant</span>
+      </a>
+      <a routerLink="/dashboard/profile" (click)="closeSidebar()" routerLinkActive="active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>Profile</span>
+      </a>
     </nav>
     <div class="sidebar-footer">
       <div class="sidebar-user">
-        <span class="user-avatar">{{ (user?.email || 'U').charAt(0).toUpperCase() }}</span>
+        <span class="user-avatar">{{ (user?.name || user?.email || 'U').charAt(0).toUpperCase() }}</span>
         <div class="user-info">
-          <span class="user-email">{{ user?.email }}</span>
-          <span class="user-role">{{ user?.role }}</span>
+          <span class="user-name">{{ user?.name || user?.email }}</span>
+          <div class="user-meta">
+            <span class="user-role-badge">{{ user?.role }}</span>
+          </div>
         </div>
       </div>
-      <button class="btn-logout" (click)="logout()">Logout</button>
+      <button class="btn-logout" (click)="logout()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Logout</span>
+      </button>
     </div>
   </aside>
   @if (sidebarOpen) {
     <div class="sidebar-backdrop" (click)="closeSidebar()"></div>
   }
   <main class="main-content">
-    <div class="topbar">
+    <header class="topbar">
       <button class="hamburger" (click)="toggleSidebar()" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       <span class="topbar-title">Inventra</span>
+    </header>
+    <div class="content-area">
+      <router-outlet />
     </div>
-    <router-outlet />
   </main>
 </div>

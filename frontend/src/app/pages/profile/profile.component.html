@@ -7,7 +7,7 @@
   </div>
 
   @if (loading()) {
-    <div style="display:flex;flex-direction:column;gap:1.5rem">
+    <div class="profile-skeleton">
       <div class="skeleton" style="height:100px;border-radius:16px"></div>
       <div class="skeleton" style="height:200px;border-radius:16px"></div>
       <div class="skeleton" style="height:260px;border-radius:16px"></div>
@@ -43,7 +43,7 @@
         </div>
 
         @if (editError) {
-          <div class="alert alert-error" style="margin:0 1.25rem 1rem">{{ editError }}</div>
+          <div class="alert alert-error profile-alert">{{ editError }}</div>
         }
 
         @if (!editMode()) {
@@ -86,7 +86,7 @@
                   <span class="form-error">Enter a valid email</span>
                 }
               </div>
-              <div class="form-actions" style="display:flex;gap:0.75rem;margin-top:1rem">
+              <div class="form-actions">
                 <button type="button" class="btn-ghost" (click)="toggleEdit()">Cancel</button>
                 <button type="submit" class="btn-primary" [disabled]="editLoading || editForm.invalid">
                   @if (editLoading) {
@@ -106,17 +106,16 @@
         </div>
         <div class="card-body">
           @if (pwError) {
-            <div class="alert alert-error" style="margin-bottom:1rem">{{ pwError }}</div>
+            <div class="alert alert-error profile-alert">{{ pwError }}</div>
           }
 
           <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
             <div class="form-group">
               <label class="form-label" for="currentPw">Current Password</label>
-              <div style="position:relative">
+              <div class="pw-input-wrap">
                 <input class="form-input" id="currentPw" [type]="showCurrentPw() ? 'text' : 'password'" formControlName="currentPassword" placeholder="Enter current password"
-                  [class.ng-invalid]="pf.currentPassword.touched && pf.currentPassword.invalid" style="padding-right:40px" />
-                <button type="button" (click)="showCurrentPw.set(!showCurrentPw())" tabindex="-1" aria-label="Toggle visibility"
-                  style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;padding:4px;display:flex">
+                  [class.ng-invalid]="pf.currentPassword.touched && pf.currentPassword.invalid" />
+                <button type="button" (click)="showCurrentPw.set(!showCurrentPw())" tabindex="-1" aria-label="Toggle visibility" class="pw-toggle-btn">
                   @if (showCurrentPw()) {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                   } @else {
@@ -131,11 +130,10 @@
 
             <div class="form-group">
               <label class="form-label" for="newPw">New Password</label>
-              <div style="position:relative">
+              <div class="pw-input-wrap">
                 <input class="form-input" id="newPw" [type]="showNewPw() ? 'text' : 'password'" formControlName="newPassword" placeholder="Enter new password"
-                  [class.ng-invalid]="pf.newPassword.touched && pf.newPassword.invalid" style="padding-right:40px" />
-                <button type="button" (click)="showNewPw.set(!showNewPw())" tabindex="-1" aria-label="Toggle visibility"
-                  style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;padding:4px;display:flex">
+                  [class.ng-invalid]="pf.newPassword.touched && pf.newPassword.invalid" />
+                <button type="button" (click)="showNewPw.set(!showNewPw())" tabindex="-1" aria-label="Toggle visibility" class="pw-toggle-btn">
                   @if (showNewPw()) {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                   } @else {
@@ -151,11 +149,10 @@
 
             <div class="form-group">
               <label class="form-label" for="confirmPw">Confirm New Password</label>
-              <div style="position:relative">
+              <div class="pw-input-wrap">
                 <input class="form-input" id="confirmPw" [type]="showConfirmPw() ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Re-enter new password"
-                  [class.ng-invalid]="pf.confirmPassword.touched && pf.confirmPassword.invalid" style="padding-right:40px" />
-                <button type="button" (click)="showConfirmPw.set(!showConfirmPw())" tabindex="-1" aria-label="Toggle visibility"
-                  style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;padding:4px;display:flex">
+                  [class.ng-invalid]="pf.confirmPassword.touched && pf.confirmPassword.invalid" />
+                <button type="button" (click)="showConfirmPw.set(!showConfirmPw())" tabindex="-1" aria-label="Toggle visibility" class="pw-toggle-btn">
                   @if (showConfirmPw()) {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                   } @else {
@@ -171,7 +168,7 @@
               }
             </div>
 
-            <button type="submit" class="btn-primary" style="width:100%;margin-top:0.5rem" [disabled]="pwLoading || passwordForm.invalid">
+            <button type="submit" class="btn-primary btn-block" [disabled]="pwLoading || passwordForm.invalid">
               @if (pwLoading) {
                 <span class="spinner" style="width:16px;height:16px;border-width:2px"></span>
                 Updating…
